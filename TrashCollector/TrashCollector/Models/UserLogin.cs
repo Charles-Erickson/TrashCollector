@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TrashCollector
 {
-    public class Employee
+    public class UserLogin
     {
         [Key]
-        public int EmployeeId { get; set; }
-
-        
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }        
     }
 }
