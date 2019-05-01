@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
 namespace TrashCollector.Models
@@ -17,6 +18,9 @@ namespace TrashCollector.Models
         public int Zipcode { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+
+        [ForeignKey("UserLogin")]
+        public int UserId { get; set; }
 
     }
 }
