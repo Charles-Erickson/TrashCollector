@@ -128,5 +128,13 @@ namespace TrashCollector.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult ViewBill(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            View(customer.Billing);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
