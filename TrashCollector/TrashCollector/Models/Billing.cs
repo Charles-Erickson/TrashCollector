@@ -12,7 +12,9 @@ namespace TrashCollector.Models
         [Key]
         public int BillingId { get; set; }
         public double BillAmount { get; set; }
+
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
+        public Customer customer { get; set; }
     }
 }

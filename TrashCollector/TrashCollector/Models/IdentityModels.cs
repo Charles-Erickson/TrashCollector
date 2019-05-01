@@ -29,7 +29,9 @@ namespace TrashCollector.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<TrashCollector.UserLogin> UserLogins { get; set; }
+        public DbSet<Employee> Employees{ get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Billing> Billings { get; set; }
+        public DbSet<UserLogin> UserLogins { get; set; }
     }
 }

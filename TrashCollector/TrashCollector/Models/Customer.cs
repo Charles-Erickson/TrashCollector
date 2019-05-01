@@ -21,6 +21,6 @@ namespace TrashCollector.Models
 
         [ForeignKey("UserLogin")]
         public int UserId { get; set; }
-
+        public UserLogin userLogin { get; set; }
     }
 }

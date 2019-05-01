@@ -15,10 +15,8 @@ namespace TrashCollector
         public string LastName { get; set; }
         public int ZipCode { get; set; }
 
-        [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
-
         [ForeignKey("UserLogin")]
         public int UserId { get; set; }
+        public UserLogin userLogin { get; set; }
     }
 }
