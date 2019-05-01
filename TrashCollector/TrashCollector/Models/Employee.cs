@@ -17,6 +17,6 @@ namespace TrashCollector
 
         [ForeignKey("UserLogin")]
         public int UserId { get; set; }
-        public UserLogin userLogin { get; set; }
+        public virtual UserLogin UserLogin { get; set; }
     }
 }

@@ -13,8 +13,8 @@ namespace TrashCollector.Models
         public int BillingId { get; set; }
         public double BillAmount { get; set; }
 
-        [ForeignKey("Customer")]
+        [ForeignKey("customer")]
         public int CustomerId { get; set; }
-        public Customer customer { get; set; }
+        public virtual Customer customer { get; set; }
     }
 }

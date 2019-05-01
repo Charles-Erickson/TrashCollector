@@ -19,8 +19,8 @@ namespace TrashCollector.Models
         public string City { get; set; }
         public string State { get; set; }
 
-        [ForeignKey("UserLogin")]
+        [ForeignKey("userLogin")]
         public int UserId { get; set; }
-        public UserLogin userLogin { get; set; }
+        public virtual UserLogin userLogin { get; set; }
     }
 }

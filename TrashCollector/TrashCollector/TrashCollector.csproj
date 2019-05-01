@@ -173,7 +173,17 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
+    <Compile Include="Migrations\201904302104575_InitialCreate.cs" />
+    <Compile Include="Migrations\201904302104575_InitialCreate.Designer.cs">
+      <DependentUpon>201904302104575_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905011535414_FirstMigration.cs" />
+    <Compile Include="Migrations\201905011535414_FirstMigration.Designer.cs">
+      <DependentUpon>201905011535414_FirstMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Billing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -252,6 +262,16 @@
     <Content Include="Views\UserLogins\Details.cshtml" />
     <Content Include="Views\UserLogins\Edit.cshtml" />
     <Content Include="Views\UserLogins\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -268,6 +288,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904302104575_InitialCreate.resx">
+      <DependentUpon>201904302104575_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905011535414_FirstMigration.resx">
+      <DependentUpon>201905011535414_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
