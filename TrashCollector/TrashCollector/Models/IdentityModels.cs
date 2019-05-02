@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TrashCollector.Models
@@ -33,6 +34,7 @@ namespace TrashCollector.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Billing> Billings { get; set; }
         public DbSet<UserLogin> UserLogins { get; set; }
-       
+        public string UserRole { get; set; }      
+        public string UserName { get; set; }
     }
 }

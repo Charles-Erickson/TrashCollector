@@ -185,6 +185,18 @@
     <Compile Include="Migrations\201905011535414_FirstMigration.Designer.cs">
       <DependentUpon>201905011535414_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905012035566_SecondMigration.cs" />
+    <Compile Include="Migrations\201905012035566_SecondMigration.Designer.cs">
+      <DependentUpon>201905012035566_SecondMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905021324554_thridmigration.cs" />
+    <Compile Include="Migrations\201905021324554_thridmigration.Designer.cs">
+      <DependentUpon>201905021324554_thridmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905021747574_fourthMigration.cs" />
+    <Compile Include="Migrations\201905021747574_fourthMigration.Designer.cs">
+      <DependentUpon>201905021747574_fourthMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Billing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -301,6 +313,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905011535414_FirstMigration.resx">
       <DependentUpon>201905011535414_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905012035566_SecondMigration.resx">
+      <DependentUpon>201905012035566_SecondMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021324554_thridmigration.resx">
+      <DependentUpon>201905021324554_thridmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021747574_fourthMigration.resx">
+      <DependentUpon>201905021747574_fourthMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

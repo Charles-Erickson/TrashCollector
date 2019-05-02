@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Owin;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,10 @@ namespace TrashCollector.Models
         public int Zipcode { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public DateTime OneTimePickUp { get; set; }
+
 
         [ForeignKey("userLogin")]
         public int UserId { get; set; }

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using Owin;
 using System.Web.Mvc;
 using TrashCollector;
 using TrashCollector.Models;
@@ -13,6 +14,9 @@ namespace TrashCollector.Controllers
 {
     public class EmployeesController : Controller
     {
+
+        //string currentlyLoggedInUserId = User.Identity.GetUserId();
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Employees
@@ -129,5 +133,9 @@ namespace TrashCollector.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //public ActionResult
     }
 }
+
+
