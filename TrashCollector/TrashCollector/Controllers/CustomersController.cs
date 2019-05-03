@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,8 +18,9 @@ namespace TrashCollector.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.Include(c => c.userLogin);
-            return View(customers.ToList());
+            var CustomerLoggedIn = User.Identity.GetUserId();
+            var customers = db.Customers.Where(u => u.ApplicationUserId == CustomerLoggedIn);
+            return View(customers);
         }
 
         // GET: Customers/Details/5
@@ -57,7 +59,7 @@ namespace TrashCollector.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.UserId);
+            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
 
@@ -73,7 +75,7 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.UserId);
+            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
 
@@ -90,7 +92,7 @@ namespace TrashCollector.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.UserId);
+            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
 

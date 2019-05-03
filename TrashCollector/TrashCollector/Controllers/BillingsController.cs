@@ -17,8 +17,9 @@ namespace TrashCollector.Controllers
         // GET: Billings
         public ActionResult Index()
         {
-            var billings = db.Billings.Include(b => b.customer);
-            return View(billings.ToList());
+
+            
+            return View();
         }
 
         // GET: Billings/Details/5
@@ -57,7 +58,7 @@ namespace TrashCollector.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", billing.CustomerId);
+            //ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", billing.CustomerId);
             return View(billing);
         }
 
@@ -73,7 +74,7 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", billing.CustomerId);
+           // ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", billing.CustomerId);
             return View(billing);
         }
 
@@ -90,7 +91,7 @@ namespace TrashCollector.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", billing.CustomerId);
+            //ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", billing.CustomerId);
             return View(billing);
         }
 

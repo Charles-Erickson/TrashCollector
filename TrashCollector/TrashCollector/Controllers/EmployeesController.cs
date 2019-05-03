@@ -9,6 +9,7 @@ using Owin;
 using System.Web.Mvc;
 using TrashCollector;
 using TrashCollector.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TrashCollector.Controllers
 {
@@ -22,8 +23,9 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.UserLogin);
-            return View(employees.ToList());
+            var EmployeeLoggedIn = User.Identity.GetUserId();
+            var employees = db.Employees.Include(e => e.ApplicationUserId==EmployeeLoggedIn);
+            return View(employees);
         }
 
         // GET: Employees/Details/5
@@ -62,7 +64,7 @@ namespace TrashCollector.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", employee.UserId);
+            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", employee.ApplicationUserId);
             return View(employee);
         }
 
@@ -78,7 +80,7 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", employee.UserId);
+            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", employee.ApplicationUserId);
             return View(employee);
         }
 
@@ -95,7 +97,7 @@ namespace TrashCollector.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", employee.UserId);
+            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", employee.ApplicationUserId);
             return View(employee);
         }
 

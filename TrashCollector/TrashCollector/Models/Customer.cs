@@ -12,20 +12,29 @@ namespace TrashCollector.Models
     {
         [Key]
         public int CustomerId { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
-        public double Billing { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         public int Zipcode { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string State { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime OneTimePickUp { get; set; }
 
 
-        [ForeignKey("userLogin")]
-        public int UserId { get; set; }
-        public virtual UserLogin userLogin { get; set; }
+       [ForeignKey("ApplicationUser")]
+       public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
+        [ForeignKey("Billing")]
+        public int BillingId { get; set; }
+        public virtual Billing Billing { get; set; }
     }
 }
