@@ -19,7 +19,7 @@ namespace TrashCollector.Models
         [Required]
         public string Address { get; set; }
         [Required]
-        public int Zipcode { get; set; }
+        public string Zipcode { get; set; }
         [Required]
         public string City { get; set; }
         [Required]
