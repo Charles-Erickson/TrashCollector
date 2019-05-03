@@ -168,6 +168,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicatonDBContext.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -176,6 +177,8 @@
     <Compile Include="Controllers\BillingsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
     <Compile Include="Migrations\201904302104575_InitialCreate.cs" />
     <Compile Include="Migrations\201904302104575_InitialCreate.Designer.cs">
@@ -196,6 +199,10 @@
     <Compile Include="Migrations\201905021747574_fourthMigration.cs" />
     <Compile Include="Migrations\201905021747574_fourthMigration.Designer.cs">
       <DependentUpon>201905021747574_fourthMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905031533404_fifthmigration.cs" />
+    <Compile Include="Migrations\201905031533404_fifthmigration.Designer.cs">
+      <DependentUpon>201905031533404_fifthmigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Billing.cs" />
@@ -290,6 +297,7 @@
     <Content Include="Views\Billings\Details.cshtml" />
     <Content Include="Views\Billings\Edit.cshtml" />
     <Content Include="Views\Billings\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905021747574_fourthMigration.resx">
       <DependentUpon>201905021747574_fourthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031533404_fifthmigration.resx">
+      <DependentUpon>201905031533404_fifthmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -86,6 +86,11 @@ namespace TrashCollector
             }
             return manager;
         }
+
+        internal bool UserRole(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.
