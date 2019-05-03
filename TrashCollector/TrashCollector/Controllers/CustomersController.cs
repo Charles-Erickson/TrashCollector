@@ -41,8 +41,9 @@ namespace TrashCollector.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName");
-            return View();
+           var id= User.Identity.GetUserId();
+             Customer customer = new Customer();
+            return View(customer);
         }
 
         // POST: Customers/Create
@@ -50,7 +51,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,FirstName,LastName,Billing,Address,Zipcode,City,State,UserId")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerId,FirstName,LastName,Billing,Address,Zipcode,City,StarteDate,EndDate,OneTimePickUp,State,UserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +60,7 @@ namespace TrashCollector.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.ApplicationUserId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
 
@@ -75,7 +76,7 @@ namespace TrashCollector.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.ApplicationUserId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
 
@@ -84,7 +85,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerId,FirstName,LastName,Billing,Address,Zipcode,City,State,UserId")] Customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerId,FirstName,LastName,Billing,Address,Zipcode,City,StarteDate,EndDate,OneTimePickUp,State,UserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -92,9 +93,28 @@ namespace TrashCollector.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.UserLogins, "UserId", "UserName", customer.ApplicationUserId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
+
+        //GET: Customers/StartDate
+        //public ActionResult StartDate(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Customer customer = db.Customers.Find(id);
+        //    if (customer == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(customer);
+        
+
+        //POST:Customer/StartDate
+       // public ActionResult StarteDate
+
 
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)

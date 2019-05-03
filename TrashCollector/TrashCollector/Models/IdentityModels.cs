@@ -33,7 +33,7 @@ namespace TrashCollector.Models
         public DbSet<Employee> Employees{ get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Billing> Billings { get; set; }
-        public DbSet<UserLogin> UserLogins { get; set; }
+        //public DbSet<UserLogin> UserLogins { get; set; }
         public string UserRole { get; set; }      
         public string UserName { get; set; }
     }

@@ -18,7 +18,7 @@ namespace TrashCollector
         [Required]
         public string LastName { get; set; }
         [Required]
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
