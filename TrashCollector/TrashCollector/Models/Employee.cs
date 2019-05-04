@@ -23,5 +23,11 @@ namespace TrashCollector
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
+        [ForeignKey("Customers")]
+        public List<Customer> CustomersList { get; set; }
+        public Customer Customers { get; set;}
+
+
     }
 }
