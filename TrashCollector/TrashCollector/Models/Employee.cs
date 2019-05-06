@@ -28,6 +28,8 @@ namespace TrashCollector
         public int CustomersId { get; set; }
         public Customer Customers { get; set;}
 
+        public List<bool> PickUps { get; set; }
+
 
     }
 }

@@ -18,6 +18,7 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         [Required]
         public string Address { get; set; }
+        public string AddressLine2 { get; set; }
         [Required]
         public string Zipcode { get; set; }
         [Required]
