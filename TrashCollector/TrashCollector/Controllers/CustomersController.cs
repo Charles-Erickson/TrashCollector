@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -56,6 +57,7 @@ namespace TrashCollector.Controllers
             if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
+                UpdateDates(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,29 +68,42 @@ namespace TrashCollector.Controllers
 
 
 
-        //public void UpdateDates()
-        //{
-        //    foreach (var change in Customer)
-        //    {
-        //        var values = change.CurrentValues;
-        //        foreach (var name in values.PropertyNames)
-        //        {
-        //            var value = values[name];
-        //            if (value is DateTime)
-        //            {
-        //                var date = (DateTime)value;
-        //                if (date < SqlDateTime.MinValue.Value)
-        //                {
-        //                    values[name] = SqlDateTime.MinValue.Value;
-        //                }
-        //                else if (date > SqlDateTime.MaxValue.Value)
-        //                {
-        //                    values[name] = SqlDateTime.MaxValue.Value;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        public void UpdateDates(Customer customer)
+        {
+            if (customer.EndDate < SqlDateTime.MinValue.Value)
+            {
+                customer.EndDate = SqlDateTime.MinValue.Value;
+            }
+            if(customer.StartDate< SqlDateTime.MinValue.Value)
+            {
+                customer.StartDate=SqlDateTime.MinValue.Value;
+            }
+            if(customer.OneTimePickUp< SqlDateTime.MinValue.Value)
+            {
+                customer.OneTimePickUp = SqlDateTime.MinValue.Value;
+            }
+
+            //foreach (var change in customer.OfType(DateTime))
+            //{
+            //    var values = change.CurrentValues;
+            //    foreach (var name in values.PropertyNames)
+            //    {
+            //        var value = values[name];
+            //        if (value is DateTime)
+            //        {
+            //            var date = (DateTime)value;
+            //            if (date < SqlDateTime.MinValue.Value)
+            //            {
+            //                values[name] = SqlDateTime.MinValue.Value;
+            //            }
+            //            else if (date > SqlDateTime.MaxValue.Value)
+            //            {
+            //                values[name] = SqlDateTime.MaxValue.Value;
+            //            }
+            //        }
+            //    }
+            //}
+        }
 
 
         // GET: Customers/Edit/5

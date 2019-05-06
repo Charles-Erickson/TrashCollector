@@ -6,6 +6,7 @@ using Owin;
 using TrashCollector.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 [assembly: OwinStartupAttribute(typeof(TrashCollector.Startup))]
 namespace TrashCollector
@@ -15,7 +16,7 @@ namespace TrashCollector
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-           //createRolesAndUsers();
+          createRolesAndUsers();
         }
 
         public void createRolesAndUsers()
@@ -41,6 +42,20 @@ namespace TrashCollector
                 roleManager.Create(role);
 
             }
+
         }
+
+        //public ActionResult Go()
+        //{
+        //    if (User.IsInRole("Employee"))
+        //    {
+        //        return RedirectToAction("List", "User");
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //}
+
     }
 }
