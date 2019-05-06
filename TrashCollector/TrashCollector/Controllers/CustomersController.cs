@@ -74,14 +74,15 @@ namespace TrashCollector.Controllers
             {
                 customer.EndDate = SqlDateTime.MinValue.Value;
             }
-            if(customer.StartDate< SqlDateTime.MinValue.Value)
+            if (customer.StartDate < SqlDateTime.MinValue.Value)
             {
-                customer.StartDate=SqlDateTime.MinValue.Value;
+                customer.StartDate = SqlDateTime.MinValue.Value;
             }
-            if(customer.OneTimePickUp< SqlDateTime.MinValue.Value)
+            if (customer.OneTimePickUp < SqlDateTime.MinValue.Value)
             {
                 customer.OneTimePickUp = SqlDateTime.MinValue.Value;
             }
+        }
 
             //foreach (var change in customer.OfType(DateTime))
             //{
@@ -103,8 +104,11 @@ namespace TrashCollector.Controllers
             //        }
             //    }
             //}
-        }
+        
 
+
+
+      
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
@@ -201,6 +205,70 @@ namespace TrashCollector.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult 
+
+        ////GET
+        //public ActionResult SetPickUp()
+        //{
+        //    var id = User.Identity.GetUserId();
+        //    Customer customer = new Customer();
+        //    return View(customer);
+        //}
+
+        //POST
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SetPickup()
+        //{
+
+        //    var id = User.Identity.GetUserId();
+        //    Customer customer = new Customer();
+        //        if (ModelState.IsValid)
+        //        {
+
+
+        //        //db.Entry(customer).State = EntityState.Modified;
+        //        //db.Entry(customer).State = EntityState.Modified;
+        //        //db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //        ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+        //        return View(customer);
+
+        //}
+
+
+        // GET: Customers/Edit/5
+        public ActionResult SetPickUp(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetPickUp([Bind(Include = "StartDate")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            return View(customer);
+        }
+
     }
 }
