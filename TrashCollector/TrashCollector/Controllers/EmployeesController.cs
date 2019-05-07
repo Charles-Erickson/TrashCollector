@@ -136,7 +136,30 @@ namespace TrashCollector.Controllers
             base.Dispose(disposing);
         }
 
-        //public ActionResult
+        //public ActionResult FindDayOfWeek(Employee employee)
+        //{
+        //    var employeeId = employee.EmployeeId;
+        //    var customerDay = db.Employees.Where(u => u.EmployeeId == employeeId).Select(db.Customers.Startdate);
+        //    var customernumber = customerDay.DayOfWeek;
+        //    var dayNumber = DateTime.Now.DayOfWeek;
+        //}
+
+
+
+
+
+        //public ActionResult PickUp()
+        //{
+        //    var EmployeeLoggedIn = User.Identity.GetUserId();
+        //    var employees = db.Employees.Include(e => e.ApplicationUserId == EmployeeLoggedIn);
+        //    return View(employees);
+        //}
+
+
+        //public ActionResult PickUp(Employee employee)
+        //{
+        
+        //}
     }
 }
 
