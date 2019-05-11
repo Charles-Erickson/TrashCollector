@@ -20,9 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.LastName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Billing)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
@@ -39,9 +39,9 @@
     </tr>
 
 @foreach (var item in Model) {
-    @*<tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.userLogin.UserName)
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item..UserName)
         </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
@@ -49,9 +49,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Billing)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
@@ -67,8 +67,9 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.CustomerId }) |
             @Html.ActionLink("Details", "Details", new { id = item.CustomerId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CustomerId })
+            @Html.ActionLink("Delete", "Delete", new { id = item.CustomerId }) |
             @Html.ActionLink("Set Pick Up Date", "SetPickUp", new { id = item.CustomerId }) |
+            @Html.ActionLink("One Time Pickup", "OneTimePickUp", new { id=item.CustomerId})
         </td>
     </tr>
 }

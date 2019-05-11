@@ -17,7 +17,7 @@ namespace TrashCollector
         {
             ConfigureAuth(app);
             //createRolesAndUsers();
-            Go();
+            //Go();
         }
 
         public void createRolesAndUsers()
