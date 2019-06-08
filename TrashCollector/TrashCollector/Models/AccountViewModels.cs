@@ -73,7 +73,6 @@ namespace TrashCollector.Models
         [Display(Name ="UserName")]
         public string UserName { get; set; }
 
-
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

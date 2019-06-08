@@ -56,11 +56,11 @@ namespace TrashCollector.Controllers
                     //Ends Here    
                     if (model.UserRole=="Customer")
                     {
-                        return RedirectToAction("Create", "Customers");
+                        return RedirectToAction("Create", "Customer");
                     }
                     else
                     {
-                        return RedirectToAction("Create", "Employees");
+                        return RedirectToAction("Create", "Employee");
                     }
                     
                 }

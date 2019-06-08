@@ -18,13 +18,14 @@ namespace TrashCollector.Models
         public string LastName { get; set; }
         [Required]
         public string Address { get; set; }
-        public string AddressLine2 { get; set; }
         [Required]
         public string Zipcode { get; set; }
         [Required]
         public string City { get; set; }
         [Required]
         public string State { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
