@@ -33,8 +33,13 @@ namespace TrashCollector.Models
         [DataType(DataType.Date)]
         public DateTime OneTimePickUp { get; set; }
 
+        [ForeignKey("Employee")]
+        public int EmployeeId { get; set; }
+        public virtual Employee Employee { get; set; }
 
-       [ForeignKey("ApplicationUser")]
+
+
+        [ForeignKey("ApplicationUser")]
        public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 

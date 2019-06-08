@@ -65,6 +65,7 @@ namespace TrashCollector.Controllers
                 customer.Lng = geocode.longitude;
                 db.Customers.Add(customer);
                 UpdateDates(customer);
+                customer.EmployeeId = db.Employees.Where(k => k.ZipCode == customer.Zipcode).Select(w=>w.EmployeeId).FirstOrDefault();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
