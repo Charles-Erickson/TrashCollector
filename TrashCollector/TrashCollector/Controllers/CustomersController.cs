@@ -92,31 +92,40 @@ namespace TrashCollector.Controllers
             }
         }
 
-            //foreach (var change in customer.OfType(DateTime))
-            //{
-            //    var values = change.CurrentValues;
-            //    foreach (var name in values.PropertyNames)
-            //    {
-            //        var value = values[name];
-            //        if (value is DateTime)
-            //        {
-            //            var date = (DateTime)value;
-            //            if (date < SqlDateTime.MinValue.Value)
-            //            {
-            //                values[name] = SqlDateTime.MinValue.Value;
-            //            }
-            //            else if (date > SqlDateTime.MaxValue.Value)
-            //            {
-            //                values[name] = SqlDateTime.MaxValue.Value;
-            //            }
-            //        }
-            //    }
-            //}
-        
+
+        public ActionResult EmployeeCustomerList()
+        {
+            var EmployeeLoggedIn = User.Identity.GetUserId();
+            Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
+            IQueryable<Customer> customer = db.Customers.Where(n => n.EmployeeId == employee.EmployeeId);
+            return View(customer);
+        }
+
+        //foreach (var change in customer.OfType(DateTime))
+        //{
+        //    var values = change.CurrentValues;
+        //    foreach (var name in values.PropertyNames)
+        //    {
+        //        var value = values[name];
+        //        if (value is DateTime)
+        //        {
+        //            var date = (DateTime)value;
+        //            if (date < SqlDateTime.MinValue.Value)
+        //            {
+        //                values[name] = SqlDateTime.MinValue.Value;
+        //            }
+        //            else if (date > SqlDateTime.MaxValue.Value)
+        //            {
+        //                values[name] = SqlDateTime.MaxValue.Value;
+        //            }
+        //        }
+        //    }
+        //}
 
 
 
-      
+
+
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)

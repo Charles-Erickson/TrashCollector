@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace TrashCollector.Controllers
 {
 
-        public class GeoController : Controller
+    public class GeoController : Controller
         {
             string _lat;
             string _lng;
