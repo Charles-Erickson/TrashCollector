@@ -192,16 +192,17 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\GeoController.cs" />
+    <Compile Include="Controllers\PickupsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
-    <Compile Include="Migrations\201905061447193_UpdatedViews.cs" />
-    <Compile Include="Migrations\201905061447193_UpdatedViews.Designer.cs">
-      <DependentUpon>201905061447193_UpdatedViews.cs</DependentUpon>
+    <Compile Include="Migrations\201906101550144_new.cs" />
+    <Compile Include="Migrations\201906101550144_new.Designer.cs">
+      <DependentUpon>201906101550144_new.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906101503293_fiejie.cs" />
-    <Compile Include="Migrations\201906101503293_fiejie.Designer.cs">
-      <DependentUpon>201906101503293_fiejie.cs</DependentUpon>
+    <Compile Include="Migrations\201906101607315_sdad.cs" />
+    <Compile Include="Migrations\201906101607315_sdad.Designer.cs">
+      <DependentUpon>201906101607315_sdad.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Billing.cs" />
@@ -293,6 +294,12 @@
     <Content Include="Views\Billings\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Customers\EmployeeCustomerView.cshtml" />
+    <Content Include="Views\Pickups\Create.cshtml" />
+    <Content Include="Views\Pickups\Delete.cshtml" />
+    <Content Include="Views\Pickups\Details.cshtml" />
+    <Content Include="Views\Pickups\Edit.cshtml" />
+    <Content Include="Views\Pickups\Index.cshtml" />
+    <Content Include="Views\Customers\CustomerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,11 +319,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905061447193_UpdatedViews.resx">
-      <DependentUpon>201905061447193_UpdatedViews.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101550144_new.resx">
+      <DependentUpon>201906101550144_new.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906101503293_fiejie.resx">
-      <DependentUpon>201906101503293_fiejie.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101607315_sdad.resx">
+      <DependentUpon>201906101607315_sdad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -26,20 +26,22 @@ namespace TrashCollector.Models
         public string State { get; set; }
         public string Lat { get; set; }
         public string Lng { get; set; }
+        [Display(Name="Pickups will occur on a weekly basis from the start of the servic" )]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime OneTimePickUp { get; set; }
-
+        public string OneTimePickUpDay { get; set; }
+        public string DayOfWeek { get; set; }
         [DataType(DataType.Currency)]
         public double BillAmount { get; set; }
+
 
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
-
 
 
         [ForeignKey("ApplicationUser")]

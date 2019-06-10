@@ -66,6 +66,7 @@ namespace TrashCollector.Controllers
                 db.Customers.Add(customer);
                 UpdateDates(customer);
                 customer.EmployeeId = db.Employees.Where(k => k.ZipCode == customer.Zipcode).Select(w=>w.EmployeeId).FirstOrDefault();
+                customer.DayOfWeek = customer.StartDate.ToString("dddd");
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -166,6 +167,48 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+
+        // GET: Customers/Edit/5
+        public ActionResult SetOneTime(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetOneTime([Bind(Include = "OneTimePickUp")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CustomerProfile");
+            }
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            return View(customer);
+        }
+
+        public ActionResult CustomerProfile()
+        {
+            var CustomerLoggedIn = User.Identity.GetUserId();
+            Customer customer = db.Customers.Where(f => f.ApplicationUserId == CustomerLoggedIn).FirstOrDefault();
+            return View(customer);
+        }
+
+
         //GET: Customers/StartDate
         //public ActionResult StartDate(int? id)
         //{
@@ -179,10 +222,10 @@ namespace TrashCollector.Controllers
         //        return HttpNotFound();
         //    }
         //    return View(customer);
-        
+
 
         //POST:Customer/StartDate
-       // public ActionResult StarteDate
+        // public ActionResult StarteDate
 
 
         // GET: Customers/Delete/5

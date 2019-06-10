@@ -16,8 +16,8 @@ namespace TrashCollector
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //createRolesAndUsers();
-            //Go();
+            createRolesAndUsers();
+            
         }
 
         public void createRolesAndUsers()

@@ -3,7 +3,7 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdatedViews : DbMigration
+    public partial class _new : DbMigration
     {
         public override void Up()
         {
@@ -24,19 +24,25 @@ namespace TrashCollector.Migrations
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
                         Address = c.String(nullable: false),
-                        AddressLine2 = c.String(),
                         Zipcode = c.String(nullable: false),
                         City = c.String(nullable: false),
                         State = c.String(nullable: false),
+                        Lat = c.String(),
+                        Lng = c.String(),
                         StartDate = c.DateTime(nullable: false),
                         EndDate = c.DateTime(nullable: false),
                         OneTimePickUp = c.DateTime(nullable: false),
+                        DayOfWeek = c.String(),
+                        BillAmount = c.Double(nullable: false),
+                        EmployeeId = c.Int(nullable: false),
                         ApplicationUserId = c.String(maxLength: 128),
                         BillingId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.CustomerId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
                 .ForeignKey("dbo.Billings", t => t.BillingId, cascadeDelete: true)
+                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: true)
+                .Index(t => t.EmployeeId)
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.BillingId);
             
@@ -107,13 +113,10 @@ namespace TrashCollector.Migrations
                         LastName = c.String(nullable: false),
                         ZipCode = c.String(nullable: false),
                         ApplicationUserId = c.String(maxLength: 128),
-                        CustomersId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.EmployeeId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
-                .ForeignKey("dbo.Customers", t => t.CustomersId, cascadeDelete: true)
-                .Index(t => t.ApplicationUserId)
-                .Index(t => t.CustomersId);
+                .Index(t => t.ApplicationUserId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -130,7 +133,7 @@ namespace TrashCollector.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Employees", "CustomersId", "dbo.Customers");
+            DropForeignKey("dbo.Customers", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.Employees", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Customers", "BillingId", "dbo.Billings");
             DropForeignKey("dbo.Customers", "ApplicationUserId", "dbo.AspNetUsers");
@@ -138,7 +141,6 @@ namespace TrashCollector.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Employees", new[] { "CustomersId" });
             DropIndex("dbo.Employees", new[] { "ApplicationUserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -147,6 +149,7 @@ namespace TrashCollector.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Customers", new[] { "BillingId" });
             DropIndex("dbo.Customers", new[] { "ApplicationUserId" });
+            DropIndex("dbo.Customers", new[] { "EmployeeId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Employees");
             DropTable("dbo.AspNetUserRoles");
