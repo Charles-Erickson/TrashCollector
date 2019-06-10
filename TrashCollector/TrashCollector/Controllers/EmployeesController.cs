@@ -137,6 +137,14 @@ namespace TrashCollector.Controllers
             base.Dispose(disposing);
         }
 
+
+        public ActionResult AddToBill(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            customer.BillAmount = customer.BillAmount + 40;
+            return RedirectToAction("EmployeeProfile");
+        }
+
         //public ActionResult FindDayOfWeek(Employee employee)
         //{
         //    var employeeId = employee.EmployeeId;
