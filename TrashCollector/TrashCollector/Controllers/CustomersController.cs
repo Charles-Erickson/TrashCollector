@@ -101,6 +101,12 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+        public ActionResult EmployeeCustomerView(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            return View(customer);
+        }
+
         //foreach (var change in customer.OfType(DateTime))
         //{
         //    var values = change.CurrentValues;
