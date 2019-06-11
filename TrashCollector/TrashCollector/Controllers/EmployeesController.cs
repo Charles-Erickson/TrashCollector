@@ -140,7 +140,9 @@ namespace TrashCollector.Controllers
 
         public ActionResult AddToBill(int id)
         {
-            Customer customer = db.Customers.Find(id);
+            Pickup pickup = db.Pickups.Find(id);
+            var customerid = pickup.CustomerId;
+            Customer customer = db.Customers.Find(customerid);
             customer.BillAmount = customer.BillAmount + 40;
             return RedirectToAction("EmployeeProfile");
         }

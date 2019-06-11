@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -53,7 +54,9 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                var EmployeeLoggedIn = User.Identity.GetUserId();
+                Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
+                pickup.EmployeeId = employee.EmployeeId;
                 pickup.Date = DateTime.Now;
                 pickup.DayOfWeek = pickup.Date.ToString("dddd");
                 pickup.CustomerId = id;
@@ -126,6 +129,15 @@ namespace TrashCollector.Controllers
             db.Pickups.Remove(pickup);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Complete(int id)
+        {
+            var date = DateTime.Now;
+            var day = date.ToString("dddd");
+            Pickup pickup = db.Pickups.Where(o => o.CustomerId == id).Where(k => k.DayOfWeek == day).FirstOrDefault();
+            pickup.PickupDone = true;
+            return RedirectToAction("AddToBill","Employee")
         }
 
         protected override void Dispose(bool disposing)
