@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var EmployeeLoggedIn = User.Identity.GetUserId();
-            var employees = db.Employees.Include(e => e.ApplicationUserId==EmployeeLoggedIn);
+            var employees = db.Employees;
             return View(employees);
         }
 
@@ -62,7 +62,7 @@ namespace TrashCollector.Controllers
                 employee.ApplicationUserId = User.Identity.GetUserId();
                 db.Employees.Add(employee);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("EmployeeCustomerList","Customers");
             }
 
             ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", employee.ApplicationUserId);

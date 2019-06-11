@@ -137,7 +137,7 @@ namespace TrashCollector.Controllers
             var day = date.ToString("dddd");
             Pickup pickup = db.Pickups.Where(o => o.CustomerId == id).Where(k => k.DayOfWeek == day).FirstOrDefault();
             pickup.PickupDone = true;
-            return RedirectToAction("AddToBill","Employee")
+            return RedirectToAction("AddToBill", "Employee");
         }
 
         protected override void Dispose(bool disposing)

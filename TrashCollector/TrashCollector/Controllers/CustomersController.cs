@@ -52,7 +52,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,FirstName,LastName,Address,Zipcode,City,StarteDate,State")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerId,FirstName,LastName,Address,Zipcode,City,StartDate,State")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -63,12 +63,12 @@ namespace TrashCollector.Controllers
                 geocode.SendRequest(address);
                 customer.Lat = geocode.latitude;
                 customer.Lng = geocode.longitude;
-                db.Customers.Add(customer);
                 UpdateDates(customer);
-                customer.EmployeeId = db.Employees.Where(k => k.ZipCode == customer.Zipcode).Select(w=>w.EmployeeId).FirstOrDefault();
+                //customer.EmployeeId = db.Employees.Where(k => k.ZipCode == customer.Zipcode).Select(w=>w.EmployeeId).FirstOrDefault();
                 customer.DayOfWeek = customer.StartDate.ToString("dddd");
+                db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CustomerProfile");
             }
 
             ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
@@ -79,9 +79,9 @@ namespace TrashCollector.Controllers
 
         public void UpdateDates(Customer customer)
         {
-            if (customer.EndDate < SqlDateTime.MinValue.Value)
+            if (customer.PauseStart < SqlDateTime.MinValue.Value)
             {
-                customer.EndDate = SqlDateTime.MinValue.Value;
+                customer.PauseStart = SqlDateTime.MinValue.Value;
             }
             if (customer.StartDate < SqlDateTime.MinValue.Value)
             {
@@ -91,14 +91,20 @@ namespace TrashCollector.Controllers
             {
                 customer.OneTimePickUp = SqlDateTime.MinValue.Value;
             }
+            if (customer.PauseEnd < SqlDateTime.MinValue.Value)
+            {
+                customer.PauseEnd = SqlDateTime.MinValue.Value;
+            }
         }
 
 
         public ActionResult EmployeeCustomerList()
         {
+            var date = DateTime.Now;
+            var day = date.ToString("dddd");
             var EmployeeLoggedIn = User.Identity.GetUserId();
             Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
-            IQueryable<Customer> customer = db.Customers.Where(n => n.EmployeeId == employee.EmployeeId);
+            IQueryable<Customer> customer = db.Customers.Where(n => n.Zipcode == employee.ZipCode).Where(j=>j.OneTimePickUpDay==day||j.DayOfWeek==day);
             return View(customer);
         }
 
@@ -168,7 +174,7 @@ namespace TrashCollector.Controllers
         }
 
 
-        // GET: Customers/Edit/5
+        // GET: Customers/SetOneTime/5
         public ActionResult SetOneTime(int? id)
         {
             if (id == null)
@@ -184,7 +190,7 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Customers/SetOneTime/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -263,13 +269,13 @@ namespace TrashCollector.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult ViewBill(int id)
-        {
-            Customer customer = db.Customers.Find(id);
-            View(customer.Billing);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //public ActionResult ViewBill(int id)
+        //{
+        //    Customer customer = db.Customers.Find(id);
+        //    View(customer.Billing);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
 
         ////GET
@@ -335,6 +341,43 @@ namespace TrashCollector.Controllers
             ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);
         }
+
+        // GET: Customers/Edit/5
+        public ActionResult Pause(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pause([Bind(Include = "PauseStart,PauseEnd")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            return View(customer);
+        }
+
+
+
+
 
     }
 }

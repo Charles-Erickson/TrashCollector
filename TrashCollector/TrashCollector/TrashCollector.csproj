@@ -204,6 +204,26 @@
     <Compile Include="Migrations\201906101607315_sdad.Designer.cs">
       <DependentUpon>201906101607315_sdad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906111639351_sdjh.cs" />
+    <Compile Include="Migrations\201906111639351_sdjh.Designer.cs">
+      <DependentUpon>201906111639351_sdjh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111827105_fejni.cs" />
+    <Compile Include="Migrations\201906111827105_fejni.Designer.cs">
+      <DependentUpon>201906111827105_fejni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111831531_fehhhg.cs" />
+    <Compile Include="Migrations\201906111831531_fehhhg.Designer.cs">
+      <DependentUpon>201906111831531_fehhhg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111849239_fehh.cs" />
+    <Compile Include="Migrations\201906111849239_fehh.Designer.cs">
+      <DependentUpon>201906111849239_fehh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111930238_feh.cs" />
+    <Compile Include="Migrations\201906111930238_feh.Designer.cs">
+      <DependentUpon>201906111930238_feh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Billing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -300,6 +320,8 @@
     <Content Include="Views\Pickups\Edit.cshtml" />
     <Content Include="Views\Pickups\Index.cshtml" />
     <Content Include="Views\Customers\CustomerProfile.cshtml" />
+    <Content Include="Views\Customers\Pause.cshtml" />
+    <Content Include="Views\Customers\EmployeeCustomerList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,6 +346,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906101607315_sdad.resx">
       <DependentUpon>201906101607315_sdad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111639351_sdjh.resx">
+      <DependentUpon>201906111639351_sdjh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111827105_fejni.resx">
+      <DependentUpon>201906111827105_fejni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111831531_fehhhg.resx">
+      <DependentUpon>201906111831531_fehhhg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111849239_fehh.resx">
+      <DependentUpon>201906111849239_fehh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111930238_feh.resx">
+      <DependentUpon>201906111930238_feh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
