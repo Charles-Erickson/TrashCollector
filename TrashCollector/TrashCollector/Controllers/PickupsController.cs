@@ -38,7 +38,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Pickups/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName");
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
@@ -62,7 +62,7 @@ namespace TrashCollector.Controllers
                 pickup.CustomerId = id;
                 db.Pickups.Add(pickup);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Complete");
             }
 
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", pickup.CustomerId);
