@@ -109,12 +109,18 @@ namespace TrashCollector.Controllers
         }
 
 
-        public ActionResult TotalCustomerList()
+        public ActionResult TotalCustomerList(string searchString)
         {
        
             var EmployeeLoggedIn = User.Identity.GetUserId();
             Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
             IQueryable<Customer> customer = db.Customers.Where(n => n.Zipcode == employee.ZipCode);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customer = customer.Where(s => s.DayOfWeek.Contains(searchString));
+            }
+
+           
             return View(customer);
         }
 
