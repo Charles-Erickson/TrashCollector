@@ -104,7 +104,7 @@ namespace TrashCollector.Controllers
             var day = date.ToString("dddd");
             var EmployeeLoggedIn = User.Identity.GetUserId();
             Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
-            IQueryable<Customer> customer = db.Customers.Where(n => n.Zipcode == employee.ZipCode).Where(j=>j.OneTimePickUpDay==day||j.DayOfWeek==day);
+            IQueryable<Customer> customer = db.Customers.Where(n => n.Zipcode == employee.ZipCode).Where(j=>j.OneTimePickUp==date||j.DayOfWeek==day).Where(v=>v.PauseStart<date&&v.PauseEnd<date);
             return View(customer);
         }
 
@@ -214,18 +214,18 @@ namespace TrashCollector.Controllers
         public ActionResult SetOneTime([Bind(Include = "CustomerId,FirstName,LastName,Billing,Address,Zipcode,City,StarteDate,EndDate,OneTimePickUp,State,UserId")] Customer customer)
         {
 
-            //var CustomerLoggedIn = User.Identity.GetUserId();
-            //customer = db.Customers.Where(u => u.ApplicationUserId == CustomerLoggedIn).FirstOrDefault();
-            if (ModelState.IsValid)
-            {
+            var CustomerLoggedIn = User.Identity.GetUserId();
+            Customer customers = db.Customers.Where(u => u.ApplicationUserId == CustomerLoggedIn).FirstOrDefault();
+          
 
-                db.Entry(customer).State = EntityState.Modified;
+               // db.Entry(customer).State = EntityState.Modified;
+            customers.OneTimePickUp = customer.OneTimePickUp;
                 customer.OneTimePickUpDay = customer.OneTimePickUp.ToString("dddd");
                 db.SaveChanges();
                 return RedirectToAction("CustomerProfile");
-            }
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
-            return View(customer);
+        
+            //ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            //return View(customer);
         }
 
         public ActionResult CustomerProfile()
@@ -386,14 +386,18 @@ namespace TrashCollector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Pause([Bind(Include = "PauseStart,PauseEnd")] Customer customer)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
+            var CustomerLoggedIn = User.Identity.GetUserId();
+            Customer customers = db.Customers.Where(u => u.ApplicationUserId == CustomerLoggedIn).FirstOrDefault();
+
+
+               // db.Entry(customer).State = EntityState.Modified;
+            customers.PauseStart = customer.PauseStart;
+            customers.PauseEnd = customer.PauseEnd;
                 db.SaveChanges();
                 return RedirectToAction("CustomerProfile");
-            }
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
-            return View(customer);
+            
+            //ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
+            //return View(customer);
         }
 
 

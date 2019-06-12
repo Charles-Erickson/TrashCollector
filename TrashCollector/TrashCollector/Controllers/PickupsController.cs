@@ -141,6 +141,7 @@ namespace TrashCollector.Controllers
             var day = date.ToString("dddd");
             Pickup pickup = db.Pickups.Find(id);
             pickup.PickupDone = true;
+            db.SaveChanges();
             return RedirectToAction("AddToBill", "Employee");
         }
 
