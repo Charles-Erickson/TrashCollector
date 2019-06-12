@@ -1,0 +1,107 @@
+﻿@model IEnumerable<TrashCollector.Models.Customer>
+
+
+@{
+    ViewBag.Title = "TotalCustomerList";
+}
+
+<h2>TotalCustomerList</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.DropDownList("DayOfWeek")
+        <asp:ListItem Enabled="true" Text="Select day" Value="-1"></asp:ListItem>
+        <asp:ListItem Text="Monday" Value="1"></asp:ListItem>
+        <asp:ListItem Text="Tuesday" Value="2"></asp:ListItem>
+        <asp:ListItem Text="Wednesday" Value="3"></asp:ListItem>
+        <asp:ListItem Text="Thursday" Value="4"></asp:ListItem>
+        <asp:ListItem Text="Friday" Value="5"></asp:ListItem>
+        <asp:ListItem Text="Saturday" Value="6"></asp:ListItem>
+        <asp:ListItem Text="Sunday" Value="7"></asp:ListItem>
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@*@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}*@
+
+@using (Html.BeginForm())
+{
+
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DayOfWeek)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zipcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+
+
+            <th>
+                @Html.DisplayFor(model => item.DayOfWeek)
+            </th>
+
+
+            <td>
+                @Html.ActionLink("Back to Profile", "EmployeeProfile", "Employees") |
+                @Html.ActionLink("Pickup", "Create", "Pickups", new { id = item.CustomerId }, null) |
+                @Html.ActionLink("Details", "EmployeeCustomerView", new { id = item.CustomerId }) |
+                @*@Html.ActionLink("Set Pick Up Date", "SetPickUp", new { id = item.CustomerId }) |
+            @Html.ActionLink("One Time Pickup", "OneTimePickUp", new { id = item.CustomerId })*@
+            </td>
+        </tr>
+        }
+
+    </table>
+}

@@ -108,6 +108,16 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+
+        public ActionResult TotalCustomerList()
+        {
+       
+            var EmployeeLoggedIn = User.Identity.GetUserId();
+            Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
+            IQueryable<Customer> customer = db.Customers.Where(n => n.Zipcode == employee.ZipCode);
+            return View(customer);
+        }
+
         public ActionResult EmployeeCustomerView(int id)
         {
             Customer customer = db.Customers.Find(id);
@@ -195,11 +205,16 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetOneTime([Bind(Include = "OneTimePickUp")] Customer customer)
+        public ActionResult SetOneTime([Bind(Include = "CustomerId,FirstName,LastName,Billing,Address,Zipcode,City,StarteDate,EndDate,OneTimePickUp,State,UserId")] Customer customer)
         {
+
+            //var CustomerLoggedIn = User.Identity.GetUserId();
+            //customer = db.Customers.Where(u => u.ApplicationUserId == CustomerLoggedIn).FirstOrDefault();
             if (ModelState.IsValid)
             {
+
                 db.Entry(customer).State = EntityState.Modified;
+                customer.OneTimePickUpDay = customer.OneTimePickUp.ToString("dddd");
                 db.SaveChanges();
                 return RedirectToAction("CustomerProfile");
             }
@@ -369,7 +384,7 @@ namespace TrashCollector.Controllers
             {
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CustomerProfile");
             }
             ViewBag.UserId = new SelectList(db.Users, "UserId", "UserName", customer.ApplicationUserId);
             return View(customer);

@@ -144,7 +144,8 @@ namespace TrashCollector.Controllers
             var customerid = pickup.CustomerId;
             Customer customer = db.Customers.Find(customerid);
             customer.BillAmount = customer.BillAmount + 40;
-            return RedirectToAction("EmployeeProfile");
+            db.SaveChanges();
+            return RedirectToAction("Index","Pickups");
         }
 
         //public ActionResult FindDayOfWeek(Employee employee)

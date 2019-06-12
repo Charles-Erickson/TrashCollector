@@ -39,6 +39,7 @@ namespace TrashCollector.Models
         public DateTime PauseStart { get; set; }
         [DataType(DataType.Date)]
         public DateTime PauseEnd { get; set; }
+        
 
 
         //[ForeignKey("Employee")]

@@ -18,7 +18,10 @@ namespace TrashCollector.Controllers
         // GET: Pickups
         public ActionResult Index()
         {
+            var EmployeeLoggedIn = User.Identity.GetUserId();
+            Employee employee = db.Employees.Where(d => d.ApplicationUserId == EmployeeLoggedIn).FirstOrDefault();
             var pickups = db.Pickups.Include(p => p.Customer).Include(p => p.Employee);
+            pickups = pickups.Where(j => j.PickupDone == false).Where(u => u.EmployeeId == employee.EmployeeId);
             return View(pickups.ToList());
         }
 
@@ -37,19 +40,20 @@ namespace TrashCollector.Controllers
             return View(pickup);
         }
 
-        // GET: Pickups/Create
-        public ActionResult Create(int id)
-        {
-            ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName");
-            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
-            return View();
-        }
+        //// GET: Pickups/Create
+       
+        //public ActionResult Create(int id)
+        //{
+        //    ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName");
+        //    ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
+        //    return View();
+        //}
 
         // POST: Pickups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost, ActionName("Create")]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create(Pickup pickup, int id)
         {
             if (ModelState.IsValid)
@@ -62,7 +66,7 @@ namespace TrashCollector.Controllers
                 pickup.CustomerId = id;
                 db.Pickups.Add(pickup);
                 db.SaveChanges();
-                return RedirectToAction("Complete");
+                return RedirectToAction("Index");
             }
 
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", pickup.CustomerId);
@@ -98,7 +102,7 @@ namespace TrashCollector.Controllers
             {
                 db.Entry(pickup).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AddToBill","Employees");
             }
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "FirstName", pickup.CustomerId);
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", pickup.EmployeeId);
@@ -135,7 +139,7 @@ namespace TrashCollector.Controllers
         {
             var date = DateTime.Now;
             var day = date.ToString("dddd");
-            Pickup pickup = db.Pickups.Where(o => o.CustomerId == id).Where(k => k.DayOfWeek == day).FirstOrDefault();
+            Pickup pickup = db.Pickups.Find(id);
             pickup.PickupDone = true;
             return RedirectToAction("AddToBill", "Employee");
         }
